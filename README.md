@@ -344,7 +344,7 @@ cv2.destroyAllWindows()
 
 <details>
 <summary>Tiled inference</summary>
-  
+
 ```py
 from sahi import AutoDetectionModel
 from sahi.predict import get_sliced_prediction
@@ -353,16 +353,15 @@ import numpy as np
 from pathlib import Path
 from boxmot import DeepOCSORT
 
-
 tracker = DeepOCSORT(
-    model_weights=Path('osnet_x0_25_msmt17.pt'), # which ReID model to use
+    model_weights=Path('osnet_x0_25_msmt17.pt'),  # which ReID model to use
     device='cpu',
     fp16=False,
 )
 
 detection_model = AutoDetectionModel.from_pretrained(
     model_type='yolov8',
-    model_path='yolov8n.pt',
+    model_path='examples/yolov8n.pt',
     confidence_threshold=0.5,
     device="cpu",  # or 'cuda:0'
 )
@@ -391,15 +390,15 @@ while True:
         dets[ind, 4] = object_prediction.score.value
         dets[ind, 5] = object_prediction.category.id
 
-    tracks = tracker.update(dets, im) # --> (x, y, x, y, id, conf, cls, ind)
+    tracks = tracker.update(dets, im)  # --> (x, y, x, y, id, conf, cls, ind)
 
     if tracks.shape[0] != 0:
 
-        xyxys = tracks[:, 0:4].astype('int') # float64 to int
-        ids = tracks[:, 4].astype('int') # float64 to int
+        xyxys = tracks[:, 0:4].astype('int')  # float64 to int
+        ids = tracks[:, 4].astype('int')  # float64 to int
         confs = tracks[:, 5].round(decimals=2)
-        clss = tracks[:, 6].astype('int') # float64 to int
-        inds = tracks[:, 7].astype('int') # float64 to int
+        clss = tracks[:, 6].astype('int')  # float64 to int
+        inds = tracks[:, 7].astype('int')  # float64 to int
 
         # print bboxes with their associated id, cls and conf
         for xyxy, id, conf, cls in zip(xyxys, ids, confs, clss):
@@ -413,7 +412,7 @@ while True:
             cv2.putText(
                 im,
                 f'id: {id}, conf: {conf}, c: {cls}',
-                (xyxy[0], xyxy[1]-10),
+                (xyxy[0], xyxy[1] - 10),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 fontscale,
                 color,
