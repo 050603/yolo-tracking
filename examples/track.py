@@ -144,7 +144,7 @@ def parse_opt():
                         help='reid model path')
     parser.add_argument('--tracking-method', type=str, default='ocsort',
                         help='deepocsort, botsort, strongsort, ocsort, bytetrack')
-    parser.add_argument('--source', type=str, default='1.mp4',
+    parser.add_argument('--source', type=str, default='../../PALA_label_1e4/10000.mp4',
                         help='file/dir/URL/glob, 0 for webcam')
     parser.add_argument('--imgsz', '--img', '--img-size', nargs='+', type=int, default=[640],
                         help='inference size h,w')
