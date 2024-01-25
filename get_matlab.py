@@ -79,9 +79,7 @@ if __name__ == '__main__':
     source = "F:/sort/yolo_tracking/10000.mp4"
     sys.path.append('F:/sort/yolo_tracking')
     print("begin")
-    # from examples.track import yolo_track
     from examples.track import yolo_track
-    print("begin2")
     output = yolo_track(source)
     print("finish")
 

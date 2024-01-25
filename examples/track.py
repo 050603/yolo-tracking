@@ -13,7 +13,7 @@ from boxmot.utils.checks import TestRequirements
 from examples.detectors import get_yolo_inferer
 
 __tr = TestRequirements()
-__tr.check_packages(('ultralytics @ git+https://github.com/mikel-brostrom/ultralytics.git', ))  # install
+__tr.check_packages(('ultralytics @ git+https://github.com/mikel-brostrom/ultralytics.git',))  # install
 
 from ultralytics import YOLO
 from ultralytics.data.utils import VID_FORMATS
@@ -35,9 +35,9 @@ def on_predict_start(predictor, persist=False):
         f"'{predictor.custom_args.tracking_method}' is not supported. Supported ones are {TRACKERS}"
 
     tracking_config = \
-        ROOT /\
-        'boxmot' /\
-        'configs' /\
+        ROOT / \
+        'boxmot' / \
+        'configs' / \
         (predictor.custom_args.tracking_method + '.yaml')
     trackers = []
     for i in range(predictor.dataset.bs):
@@ -59,7 +59,6 @@ def on_predict_start(predictor, persist=False):
 
 @torch.no_grad()
 def run(args):
-
     yolo = YOLO(
         args.yolo_model if 'yolov8' in str(args.yolo_model) else 'yolov8n.pt',
     )
@@ -125,9 +124,9 @@ def run(args):
                         d.xyxy,
                         r.orig_img.copy(),
                         file=(
-                            yolo.predictor.save_dir / 'crops' /
-                            str(int(d.cls.cpu().numpy().item())) /
-                            str(int(d.id.cpu().numpy().item())) / f'{frame_idx}.jpg'
+                                yolo.predictor.save_dir / 'crops' /
+                                str(int(d.cls.cpu().numpy().item())) /
+                                str(int(d.id.cpu().numpy().item())) / f'{frame_idx}.jpg'
                         ),
                         BGR=True
                     )
@@ -196,7 +195,10 @@ def parse_opt(source):
 #     opt = parse_opt()
 #     run(opt)
 def yolo_track(source):
+    flag = 0
     print("track begin")
     opt = parse_opt(source)
-    print("source:",source)
+    print("source:", source)
     run(opt)
+    flag = 1
+    return flag
