@@ -67,16 +67,15 @@ def pic_to_vid(P, V, F):
 
 # 主函数
 if __name__ == '__main__':
-    print("1")
-    # IQ = for_python
+    IQ = for_python
     # 读取mat文件中的数据，假设文件名为data.mat，数据的键为IQ
     # print("IQ:", IQ)
-    # mat_to_img(IQ)
-    # print("图像——>视频")
-    # path = "images"  # 输入图片路径
-    # video_dir = "F:/sort/yolo_tracking"  # 输出视频路径
-    # fps = 30  # 跟自己的需求设置帧率
-    # pic_to_vid(path, video_dir, fps)  # 传入函数，转化视频
+    mat_to_img(IQ)
+    print("图像——>视频")
+    path = "images"  # 输入图片路径
+    video_dir = "F:/sort/yolo_tracking"  # 输出视频路径
+    fps = 30  # 跟自己的需求设置帧率
+    pic_to_vid(path, video_dir, fps)  # 传入函数，转化视频
     source = "F:/sort/yolo_tracking/10000.mp4"
     sys.path.append('F:/sort/yolo_tracking')
     print("begin")
