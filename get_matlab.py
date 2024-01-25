@@ -1,5 +1,4 @@
 # 导入所需的库
-import scipy.io  # 用于读取mat文件[^1^][1]
 import numpy as np  # 用于处理数组数据
 import matplotlib.pyplot as plt  # 用于绘制和保存图像[^2^][2]
 import os
@@ -68,17 +67,22 @@ def pic_to_vid(P, V, F):
 
 # 主函数
 if __name__ == '__main__':
-    IQ = for_python
+    print("1")
+    # IQ = for_python
     # 读取mat文件中的数据，假设文件名为data.mat，数据的键为IQ
-    print("IQ:", IQ)
-    mat_to_img(IQ)
-    print("图像——>视频")
-    path = "images"  # 输入图片路径
-    video_dir = "F:/sort/yolo_tracking"  # 输出视频路径
-    fps = 30  # 跟自己的需求设置帧率
-    pic_to_vid(path, video_dir, fps)  # 传入函数，转化视频
+    # print("IQ:", IQ)
+    # mat_to_img(IQ)
+    # print("图像——>视频")
+    # path = "images"  # 输入图片路径
+    # video_dir = "F:/sort/yolo_tracking"  # 输出视频路径
+    # fps = 30  # 跟自己的需求设置帧率
+    # pic_to_vid(path, video_dir, fps)  # 传入函数，转化视频
     source = "F:/sort/yolo_tracking/10000.mp4"
     sys.path.append('F:/sort/yolo_tracking')
+    print("begin")
+    # from examples.track import yolo_track
     from examples.track import yolo_track
+    print("begin2")
     output = yolo_track(source)
     print("finish")
+
