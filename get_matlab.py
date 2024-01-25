@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt  # 用于绘制和保存图像[^2^][2]
 import os
 import cv2
 import sys
+import scipy.io
 
 
 def mat_to_img(IQ):
@@ -32,7 +33,7 @@ def mat_to_img(IQ):
         plt.imshow(image, cmap="gray")  # 绘制模
         # 保存图像到本地文件夹，文件名为image_i.png，其中i为图像的序号
         plt.savefig(f"images/{i}.png", bbox_inches='tight', pad_inches=-0.1)
-        print("进度：", i)
+        # print("进度：", i)
         # 关闭当前的图像窗口，以便绘制下一个图像
         plt.close()
 
@@ -67,7 +68,12 @@ def pic_to_vid(P, V, F):
 
 # 主函数
 if __name__ == '__main__':
-    IQ = for_python
+    # IQ = for_python
+    # input_file = sys.argv[1]
+    input_file = "F:/PALA/PALA_data_InSilicoFlow/PALA_data_InSilicoFlow/IQ.mat"
+    # 加载.mat文件，获取IQ
+    mat = scipy.io.loadmat(input_file)
+    IQ = mat['IQ']
     # 读取mat文件中的数据，假设文件名为data.mat，数据的键为IQ
     # print("IQ:", IQ)
     mat_to_img(IQ)
@@ -78,8 +84,7 @@ if __name__ == '__main__':
     pic_to_vid(path, video_dir, fps)  # 传入函数，转化视频
     source = "F:/sort/yolo_tracking/10000.mp4"
     sys.path.append('F:/sort/yolo_tracking')
-    print("begin")
+    print("yolo begin")
     from examples.track import yolo_track
     output = yolo_track(source)
-    print("finish")
-
+    print("yolo finish")

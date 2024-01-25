@@ -174,7 +174,7 @@ def parse_opt(source):
                         help='either show all or only bboxes')
     parser.add_argument('--show-conf', action='store_false', default=False,
                         help='hide confidences when show')
-    parser.add_argument('--save-txt', action='store_true', default=True,
+    parser.add_argument('--save-txt', action='store_true',
                         help='save tracking results in a txt file')
     parser.add_argument('--save-id-crops', action='store_true',
                         help='save each crop to its respective id folder')
@@ -195,7 +195,6 @@ def parse_opt(source):
 #     opt = parse_opt()
 #     run(opt)
 def yolo_track(source):
-    flag = 0
     print("track begin")
     opt = parse_opt(source)
     print("source:", source)
