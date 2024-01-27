@@ -8,7 +8,7 @@ import pandas as pd
 # 假设文件名为data.txt，如果不是，请修改为实际的文件名
 # 假设文件中没有表头，如果有，请添加header参数
 # 使用with open方法读取文件，将每一行存入lines列表中
-with open('runs/track/exp/mot/1.mp4.txt', 'r') as file:
+with open('runs/track/ocsort3-0.3/mot/1.mp4.txt', 'r') as file:
     lines = file.readlines()
 
 # 定义一个空列表，存放每一行的数据

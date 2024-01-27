@@ -7,7 +7,7 @@ plt.rcParams['image.origin'] = 'upper'
 coordinates = []
 
 # 打开txt文件，读取每一行
-with open("runs/track/exp/mot/1.mp4.txt", "r") as f:
+with open("runs/track/ocsort3-0.3/mot/1.mp4.txt", "r") as f:
     for line in f:
         # 去掉行尾的换行符
         line = line.strip()

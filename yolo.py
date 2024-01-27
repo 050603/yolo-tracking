@@ -6,6 +6,8 @@ from pathlib import Path
 from boxmot import OCSORT
 
 tracker = OCSORT(
+    asso_func="centroid",
+    iou_threshold=0.3  # use this to set the centroid threshold that match your use-case best
 )
 
 detection_model = AutoDetectionModel.from_pretrained(
