@@ -13,7 +13,7 @@ from boxmot.utils.checks import TestRequirements
 from examples.detectors import get_yolo_inferer
 
 __tr = TestRequirements()
-__tr.check_packages(('ultralytics @ git+https://github.com/mikel-brostrom/ultralytics.git', ))  # install
+__tr.check_packages(('ultralytics @ git+https://github.com/mikel-brostrom/ultralytics.git',))  # install
 
 from ultralytics import YOLO
 from ultralytics.data.utils import VID_FORMATS
@@ -35,9 +35,9 @@ def on_predict_start(predictor, persist=False):
         f"'{predictor.custom_args.tracking_method}' is not supported. Supported ones are {TRACKERS}"
 
     tracking_config = \
-        ROOT /\
-        'boxmot' /\
-        'configs' /\
+        ROOT / \
+        'boxmot' / \
+        'configs' / \
         (predictor.custom_args.tracking_method + '.yaml')
     trackers = []
     for i in range(predictor.dataset.bs):
@@ -57,9 +57,13 @@ def on_predict_start(predictor, persist=False):
     predictor.trackers = trackers
 
 
+def format_box_coordinates(box):
+    # 创建一个格式化的坐标字符串，保留四位小数
+    return ' '.join([f"{x:.4f}" for x in box.data])
+
+
 @torch.no_grad()
 def run(args):
-
     yolo = YOLO(
         args.yolo_model if 'yolov8' in str(args.yolo_model) else 'yolov8n.pt',
     )
@@ -118,6 +122,11 @@ def run(args):
                     frame_idx,
                 )
 
+            # # 输出每一帧中所有检测到的目标物体的坐标
+            # for box in r.boxes:
+            #     # box.data 是一个包含边界框信息的张量，其形状为 [7]，其中前四个元素是边界框的坐标 (x1, y1, x2, y2)
+            #     print(f"Frame {frame_idx}: Box coordinates: {box.data}")
+
             if args.save_id_crops:
                 for d in r.boxes:
                     print('args.save_id_crops', d.data)
@@ -125,9 +134,9 @@ def run(args):
                         d.xyxy,
                         r.orig_img.copy(),
                         file=(
-                            yolo.predictor.save_dir / 'crops' /
-                            str(int(d.cls.cpu().numpy().item())) /
-                            str(int(d.id.cpu().numpy().item())) / f'{frame_idx}.jpg'
+                                yolo.predictor.save_dir / 'crops' /
+                                str(int(d.cls.cpu().numpy().item())) /
+                                str(int(d.id.cpu().numpy().item())) / f'{frame_idx}.jpg'
                         ),
                         BGR=True
                     )
@@ -138,17 +147,17 @@ def run(args):
 
 def parse_opt():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--yolo-model', type=Path, default=WEIGHTS / 'yolov8_bubble.pt',
+    parser.add_argument('--yolo-model', type=Path, default=WEIGHTS / 'yolov8_bubble_new.pt',
                         help='yolo model path')
     parser.add_argument('--reid-model', type=Path, default=WEIGHTS / '',
                         help='reid model path')
     parser.add_argument('--tracking-method', type=str, default='ocsort',
                         help='deepocsort, botsort, strongsort, ocsort, bytetrack')
-    parser.add_argument('--source', type=str, default='F:/sort/PALA_label_1e4/10000.mp4',
+    parser.add_argument('--source', type=str, default="../20000_60db.mp4",
                         help='file/dir/URL/glob, 0 for webcam')
-    parser.add_argument('--imgsz', '--img', '--img-size', nargs='+', type=int, default=[640],
+    parser.add_argument('--imgsz', '--img', '--img-size', nargs='+', type=int, default=[320],
                         help='inference size h,w')
-    parser.add_argument('--conf', type=float, default=0.3,
+    parser.add_argument('--conf', type=float, default=0.4,
                         help='confidence threshold')
     parser.add_argument('--iou', type=float, default=0.3,
                         help='intersection over union (IoU) threshold for NMS')

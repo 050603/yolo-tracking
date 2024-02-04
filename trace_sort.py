@@ -13,7 +13,7 @@
 
 # 读取文件并将数据存储在列表中
 data = []
-with open('runs/track/ocsort3-0.3/10000.mp4.txt', 'r') as file:
+with open('runs/track/oc_60db_20000/20000_60db.mp4.txt', 'r') as file:
     for line in file:
         row = line.strip().split(' ')
         data.append(row)
@@ -32,15 +32,11 @@ for i in range(len(sorted_data)):
     sorted_data[i][1], sorted_data[i][3] = sorted_data[i][3], sorted_data[i][1]
     sorted_data[i][0], sorted_data[i][1] = sorted_data[i][1], sorted_data[i][0]
     sorted_data[i][1] = str(float(sorted_data[i][1]) - float(143 / 2))
-    sorted_data[i][0] = str(float(sorted_data[i][0]) - 16)
-
-
-
-
+    # sorted_data[i][0] = str(float(sorted_data[i][0]) + 16)
 
 # 只保留前三列数据，写入到新文件
-with open('track_for_matlab.txt', 'w') as file:
+with open('oc_60db_2w_track.txt', 'w') as file:
     for row in sorted_data:
-        file.write(' '.join(row[:3]) + '\n')
+        file.write(' '.join(row[:4]) + '\n')
 
 
